@@ -1,6 +1,7 @@
 class Converter:
     def __init__(self):
         self.letters = ['A', 'B', 'C', 'D', 'E', 'F']
+        self.values = [10, 11, 12, 13, 14, 15]
 
     def decimal_to_base(self, num, base=2):
         """
@@ -26,8 +27,7 @@ class Converter:
         new_val.reverse()
         return ''.join(new_val)
 
-    @staticmethod
-    def base_to_decimal(num, base):
+    def base_to_decimal(self, num, base):
         """
         Converts a number in any base to a number in base 10 (decimal). Assumes
         that the provided number is valid.
@@ -39,7 +39,8 @@ class Converter:
         exp = len(num) - 1
         sum = 0
         for i in range(exp + 1):
-            sum += int(num[i]) * base ** exp
+            val = self.convert_int(num[i])
+            sum += val * base ** exp
             exp -= 1
         return str(sum)
 
@@ -49,3 +50,18 @@ class Converter:
             return self.letters[index]
         else:
             return str(remain)
+
+    def convert_int(self, str_num):
+        if self.is_int(str_num):
+            return int(str_num)
+        elif str_num in self.letters:
+            return self.values[self.letters.index(str_num)]
+        else:
+            ValueError
+
+    def is_int(self, str_num):
+        try:
+            int(str_num)
+            return True
+        except ValueError:
+            return False

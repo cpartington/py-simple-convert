@@ -32,11 +32,16 @@ class Converter:
         Converts a number in any base to a number in base 10 (decimal). Assumes
         that the provided number is valid.
 
-        :param num: the number to be converted
+        :param num: the number to be converted in string form
         :param base: the base of the provided number
         :return:
         """
-        pass
+        exp = len(num) - 1
+        sum = 0
+        for i in range(exp + 1):
+            sum += int(num[i]) * base ** exp
+            exp -= 1
+        return str(sum)
 
     def convert_remain(self, remain):
         if remain > 9:
